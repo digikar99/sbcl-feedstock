@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  build_number: 0
+  build_number: 1
   name: sbcl
   version: "2.6.9"
   sh: ${{ ".sh" if unix else ".bat" }}
@@ -82,6 +82,8 @@ tests:
         - lib/sbcl/contrib/sb-{posix,queue,rotate-byte,rt,simd,simple-streams,sprof}.{asd,fasl}
         - lib/sbcl/sbcl.core
         - lib/sbcl/sbcl.mk
+        - lib/sbcl/sbclrc
+        - lib/sbcl/sbclrc.d/00-README.lisp
         - share/doc/sbcl/{BUGS,COPYING,CREDITS,NEWS}
         - share/man/man1/sbcl.1
         - if: linux
