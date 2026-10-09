@@ -86,6 +86,7 @@ tests:
         - lib/sbcl/sbclrc.d/00-README.lisp
         - share/doc/sbcl/{BUGS,COPYING,CREDITS,NEWS}
         - share/man/man1/sbcl.1
+        - etc/conda/test-files/${{ name }}/**
         - if: linux
           then:
             - lib/sbcl/contrib/sb-perf.{asd,fasl}
@@ -102,6 +103,14 @@ tests:
         - if: linux and not (target_platform == "linux-ppc64le" or target_platform == "linux-riscv64")
           then:
             - strace
+
+  - files:
+      recipe:
+        - tests/sbclrc-d-write-probe.lisp
+        - tests/sbclrc-d-check-probe.lisp
+    script:
+      - sbcl --noinform --non-interactive --no-userinit --load tests/sbclrc-d-write-probe.lisp
+      - sbcl --noinform --non-interactive --no-userinit --load tests/sbclrc-d-check-probe.lisp
 
 about:
   homepage: http://www.sbcl.org
